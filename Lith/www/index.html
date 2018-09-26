@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:
+http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src 'self'
+'unsafe-inline'; media-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>WeatherApp</title>
+</head>
+<body>
+    <div data-role="page" id="main-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Lith</h1>
+            <!--<a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" id="home-btn">Home</a>-->
+            <a href="#settings-page" data-transition="slide" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-gear ui-btn-icon-notext"">Settings</a>
+        </div>
+
+        <div role="main" class="ui-content">
+
+        </div>
+
+        <!--<footer data-role="footer" data-position="fixed">
+            <h4></h4>
+        </footer>-->
+
+    </div>
+
+    <div data-role="page" id="settings-page">
+
+        <div data-role="header" class="header">
+            <h1 id="settings-title">Settings</h1>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-back ui-btn-icon-notext" data-transition="slide" data-direction="reverse" id="back-button">Back</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <fieldset data-role="controlgroup" data-iconpos="right">
+                    <input type="checkbox" name="ratio-check" id="ratio-check" />
+                    <label for="ratio-check">Ratio</label>
+
+                    <input type="checkbox" name="percentage-check" id="percentage-check" />
+                    <label for="percentage-check">percentage</label>
+                </fieldset>
+                <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="save-button" data-transition="slide" data-direction="reverse">Save</a>
+            </form>
+        </div>
+
+        <!--<footer data-role="footer" data-position="fixed">
+            <h4></h4>
+        </footer>-->
+
+    </div>
+
+    <script src="scripts/jquery-1.8.0.min.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/lith.js"></script>
+    <script src="scripts/settings.js"></script>
+</body>
+</html>
