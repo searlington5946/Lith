@@ -48,6 +48,7 @@ function createTask() {
     taskNameStr = $("#text-title").val().toString();
     if (taskNameStr.length == 0) {
         alert("Must create a title name...");
+        // disable create button
         $("#create-button").attr("href", "#");
         return -1;
     }
@@ -60,6 +61,7 @@ function createTask() {
         return -1;
     }
 
+    // allow create button to take us back to the main page
     $("#create-button").attr("href", "#main-page");
 
     var newLith = {
@@ -74,7 +76,6 @@ function createTask() {
 
     populateTaskList();
     populateTaskView();
-
     saveLiths();
 
 }
@@ -99,6 +100,7 @@ function populateTaskView() {
 
     $("#lith-form").trigger('create'); 
 
+    // turn on the correct number of liths
     var counter = 0;
     $("#lith-form").children().each(function () {
         if (counter == currentLith.complete) {
@@ -145,10 +147,11 @@ function populateTaskList() {
         listStr += "</span></a></li>";
 
         $("#liths-list").append(listStr);
-        $("#liths-list").listview("refresh");
+        $("#liths-list").listview("refresh"); // we have to call refresh to get the jQuery Mobile classes
 
     }
 
+    // store the recently clicked task in a global variable
     $("#liths-list").children("li").on('click', function () {
 
         var idx = $(this).index();
