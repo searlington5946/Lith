@@ -23,16 +23,62 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
         <div data-role="header" class="header">
             <h1 id="app-title">Lith</h1>
             <!--<a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" id="home-btn">Home</a>-->
-            <a href="#settings-page" data-transition="slide" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-gear ui-btn-icon-notext"">Settings</a>
+            <!--<a href="#settings-page" data-transition="slide" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-gear ui-btn-icon-notext" ">Settings</a>-->
+            <a href="#settings-page" data-transition="slide" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-gear ui-btn-icon-notext">Settings</a>
         </div>
 
         <div role="main" class="ui-content">
+            <ul data-role="listview" data-count-theme="b" data-inset="true" id="liths-list">
+                <!--<li data-icon="delete"><a href="#task-page">Task 1 <span class="ui-li-count">2/10</span></a></li>-->
+                <!--<li data-icon="delete"><a href="#task-page">Task 2 <span class="ui-li-count">8/20</span></a></li>-->
+                <!--<li data-icon="delete"><a href="#task-page">Task 3 <span class="ui-li-count">3/200</span></a></li>-->
+            </ul>
 
+            <a href="#create-page" class="ui-btn ui-shadow ui-corner-all" id="create-button-main" data-transition="slide">Create</a>
         </div>
 
         <!--<footer data-role="footer" data-position="fixed">
             <h4></h4>
         </footer>-->
+
+    </div>
+
+    <div data-role="page" id="create-page">
+
+        <div data-role="header" class="header">
+            <h1 id="create-title">Create</h1>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-back ui-btn-icon-notext" data-transition="slide" data-direction="reverse" id="back-button">Back</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <label for="text-title">Title</label>
+                <input data-clear-btn="true" name="text-title" id="text-title" value="" type="text" />
+                <label for="number-amount">Amount</label>
+                <input data-clear-btn="true" pattern="[0-9]*" name="number-amount" id="number-amount" value="" type="number" />
+                <a href="#" class="ui-btn ui-shadow ui-corner-all" id="create-button" data-transition="slide" data-direction="reverse">Create</a>
+            </form>
+        </div>
+
+    </div>
+
+    <div data-role="page" id="task-page">
+
+        <div data-role="header" class="header">
+            <h1 id="task-title">Task 1</h1>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-back ui-btn-icon-notext" data-transition="slide" data-direction="reverse" id="back-button">Back</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            Liths:
+            <form id="lith-form">
+                <!--<input data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" type="checkbox">-->
+                <!--<input data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" type="checkbox">-->
+                <!--<input data-role="flipswitch" name="flip-checkbox-3" id="flip-checkbox-3" type="checkbox">-->
+            </form>
+            <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="save-liths-button" data-transition="slide" data-direction="reverse">Save</a>
+            <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="delete-liths-button" data-transition="slide" data-direction="reverse">Delete</a>
+        </div>
 
     </div>
 
@@ -44,13 +90,24 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
         </div>
 
         <div role="main" class="ui-content">
-            <form>
+            <!--<form>
                 <fieldset data-role="controlgroup" data-iconpos="right">
                     <input type="checkbox" name="ratio-check" id="ratio-check" />
                     <label for="ratio-check">Ratio</label>
 
                     <input type="checkbox" name="percentage-check" id="percentage-check" />
-                    <label for="percentage-check">percentage</label>
+                    <label for="percentage-check">Percentage</label>
+                </fieldset>
+                <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="save-button" data-transition="slide" data-direction="reverse">Save</a>
+            </form>-->
+
+            <form>
+                <fieldset data-role="controlgroup">
+                    <legend>Display as:</legend>
+                    <input name="display" id="ratio-radio" value="ratio" checked="checked" type="radio">
+                    <label for="ratio-radio">Ratio</label>
+                    <input name="display" id="percentage-radio" value="percentage" type="radio">
+                    <label for="percentage-radio">Percentage</label>
                 </fieldset>
                 <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="save-button" data-transition="slide" data-direction="reverse">Save</a>
             </form>
