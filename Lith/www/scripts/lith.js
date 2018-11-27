@@ -1,13 +1,37 @@
-﻿var currentLith;
+﻿var currentTask;
 var globalIndex;
 
-function saveLiths() {
+function resetSystem() {
+
+    // nuke everything
+
+    if (confirm("Are you sure you want to delete everything?")) {
+
+        liths = [];
+        currentTask = null;
+        globalIndex = null;
+        populateTaskList();
+        populateTaskView();
+        saveTasks();
+
+    }
+
+}
+
+function setCurrentTask(idx) {
+
+    currentTask = liths[idx];
+    populateTaskView();
+
+}
+
+function saveTasks() {
 
     localStorage.setItem("liths", JSON.stringify(liths));
 
 }
 
-function loadLiths() {
+function loadTasks() {
 
     liths = JSON.parse(localStorage.getItem("liths"));
 
@@ -24,22 +48,26 @@ function loadLiths() {
 
 }
 
-function deleteLith() {
+function deleteTask() {
 
-    liths.splice(globalIndex, 1);
-    saveLiths();
+    if (confirm("Are you sure you want to delete this task?")) {
+
+        liths.splice(globalIndex, 1);
+        saveTasks();
+
+    }
 
 }
 
 function recordCompletedLiths() {
 
-    currentLith.complete = 0;
+    currentTask.complete = 0;
 
     $("#lith-form").children().each(function () {
-        if ($(this).hasClass("ui-flipswitch-active")) { currentLith.complete += 1; }
+        if ($(this).hasClass("ui-flipswitch-active")) { currentTask.complete += 1; }
     });
 
-    saveLiths();
+    saveTasks();
 
 }
 
@@ -76,22 +104,22 @@ function createTask() {
 
     populateTaskList();
     populateTaskView();
-    saveLiths();
+    saveTasks();
 
 }
 
 function populateTaskView() {
 
-    if (liths.length == 0 || currentLith == null) {
+    if (liths.length == 0 || currentTask == null) {
         return 0;
     }
 
-    $("#task-title").html(currentLith.title);
+    $("#task-title").html(currentTask.title);
 
     lithListStr = "";
     $("#lith-form").html("");
 
-    for (var i = 1; i <= currentLith.total; i++) {
+    for (var i = 1; i <= currentTask.total; i++) {
 
         lithListStr = "<input data-role=\"flipswitch\" name=\"flip-checkbox-" + i + "\" id=\"flip-checkbox-" + i + "\" type=\"checkbox\">";
         $("#lith-form").append(lithListStr);
@@ -103,19 +131,12 @@ function populateTaskView() {
     // turn on the correct number of liths
     var counter = 0;
     $("#lith-form").children().each(function () {
-        if (counter == currentLith.complete) {
+        if (counter == currentTask.complete) {
             return false;
         }
         $(this).addClass("ui-flipswitch-active");
         counter += 1;
     });
-
-}
-
-function updateCurrentLith(idx) {
-
-    currentLith = liths[idx];
-    populateTaskView();
 
 }
 
@@ -156,7 +177,7 @@ function populateTaskList() {
 
         var idx = $(this).index();
         globalIndex = idx;
-        updateCurrentLith(idx);
+        setCurrentTask(idx);
 
     })
 

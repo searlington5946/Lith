@@ -42,11 +42,13 @@ $('#settings-page').on('pagecreate', function (event) {
     // user left without saving so just reload the current settings
     $('#back-button').click(function () { loadSettings(); });
 
+    $('#reset-system-button').click(function () { resetSystem(); });
+
 });
 
 $("#main-page").on('pagecreate', function (event) {
 
-    loadLiths();
+    loadTasks();
     loadSettings();
 
 });
@@ -55,7 +57,7 @@ $("#task-page").on('pagecreate', function (event) {
 
     populateTaskView();
     $('#save-liths-button').click(function () { recordCompletedLiths(); populateTaskList(); });
-    $('#delete-liths-button').click(function () { deleteLith(); populateTaskList(); });
+    $('#delete-liths-button').click(function () { deleteTask(); populateTaskList(); });
 
 });
 

@@ -4,7 +4,7 @@
 
 "The man who moves a mountain begins by carrying away small stones."
 
-Lith is short for lithic (or stone). It allows you to visualize a task as a series of smaller goals called liths.
+Lith is short for lithic (or stone). It allows you to visualize your progress towards a goal by dividing a larger task into smaller tasks called liths.
 
 ## How do I use it?
 
