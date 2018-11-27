@@ -1,5 +1,6 @@
 ﻿var currentTask;
 var globalIndex;
+var tasks = [];
 
 function resetSystem() {
 
@@ -7,12 +8,18 @@ function resetSystem() {
 
     if (confirm("Are you sure you want to delete everything?")) {
 
-        liths = [];
+        tasks = [];
         currentTask = null;
         globalIndex = null;
+        percentageEnabled = false;
+        ratioEnabled = true;
         populateTaskList();
         populateTaskView();
         saveTasks();
+        saveSettings();
+
+        $("#ratio-radio").prop('checked', ratioEnabled).checkboxradio('refresh');
+        $("#percentage-radio").prop('checked', percentageEnabled).checkboxradio('refresh');
 
     }
 
@@ -20,29 +27,29 @@ function resetSystem() {
 
 function setCurrentTask(idx) {
 
-    currentTask = liths[idx];
+    currentTask = tasks[idx];
     populateTaskView();
 
 }
 
 function saveTasks() {
 
-    localStorage.setItem("liths", JSON.stringify(liths));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
 }
 
 function loadTasks() {
 
-    liths = JSON.parse(localStorage.getItem("liths"));
+    tasks = JSON.parse(localStorage.getItem("tasks"));
 
-    if (liths != null) {
+    if (tasks != null) {
 
         populateTaskList();
 
     } else {
 
         // storage is empty
-        liths = [];
+        tasks = [];
 
     }
 
@@ -52,7 +59,7 @@ function deleteTask() {
 
     if (confirm("Are you sure you want to delete this task?")) {
 
-        liths.splice(globalIndex, 1);
+        tasks.splice(globalIndex, 1);
         saveTasks();
 
     }
@@ -92,7 +99,7 @@ function createTask() {
     // allow create button to take us back to the main page
     $("#create-button").attr("href", "#main-page");
 
-    var newLith = {
+    var newTask = {
 
         title: taskNameStr,
         total: amnt,
@@ -100,7 +107,7 @@ function createTask() {
 
     };
 
-    liths.push(newLith);
+    tasks.push(newTask);
 
     populateTaskList();
     populateTaskView();
@@ -110,7 +117,7 @@ function createTask() {
 
 function populateTaskView() {
 
-    if (liths.length == 0 || currentTask == null) {
+    if (tasks.length == 0 || currentTask == null) {
         return 0;
     }
 
@@ -142,38 +149,38 @@ function populateTaskView() {
 
 function populateTaskList() {
 
-    $("#liths-list").html(""); // reset list
+    $("#tasks-list").html(""); // reset list
 
-    if (liths.length == 0) {
-        $("#liths-list").html("<center>You don't have any tasks. Create some!</center>");
+    if (tasks.length == 0) {
+        $("#tasks-list").html("<center>You don't have any tasks. Create some!</center>");
     }
 
     loadSettings();
 
-    for (var i = 0; i < liths.length; i++) {
+    for (var i = 0; i < tasks.length; i++) {
 
         if (ratioEnabled) {
-            amntStr = liths[i].complete.toString() + "/" + liths[i].total.toString();
+            amntStr = tasks[i].complete.toString() + "/" + tasks[i].total.toString();
         } else {
-            decimal = liths[i].complete / liths[i].total;
+            decimal = tasks[i].complete / tasks[i].total;
             percent = Math.round(decimal * 100);
             amntStr = percent.toString() + "%";
         }
 
         listStr = "<li>";
         listStr += "<a href=\"#task-page\">";
-        listStr += liths[i].title;
+        listStr += tasks[i].title;
         listStr += "<span class=\"ui-li-count\">";
         listStr += amntStr;
         listStr += "</span></a></li>";
 
-        $("#liths-list").append(listStr);
-        $("#liths-list").listview("refresh"); // we have to call refresh to get the jQuery Mobile classes
+        $("#tasks-list").append(listStr);
+        $("#tasks-list").listview("refresh"); // we have to call refresh to get the jQuery Mobile classes
 
     }
 
     // store the recently clicked task in a global variable
-    $("#liths-list").children("li").on('click', function () {
+    $("#tasks-list").children("li").on('click', function () {
 
         var idx = $(this).index();
         globalIndex = idx;
