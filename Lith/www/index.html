@@ -5,9 +5,9 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:
 http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src 'self'
-'unsafe-inline'; media-src *">
+'unsafe-inline'; media-src *">-->
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -15,7 +15,7 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>WeatherApp</title>
+    <title>Lith</title>
 </head>
 <body>
     <div data-role="page" id="main-page">
@@ -34,7 +34,7 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
                 <!--<li data-icon="delete"><a href="#task-page">Task 3 <span class="ui-li-count">3/200</span></a></li>-->
             </ul>
 
-            <a href="#create-page" class="ui-btn ui-shadow ui-corner-all" id="create-button-main" data-transition="slide">Create</a>
+            <a href="#create-page" class="ui-btn ui-shadow ui-corner-all" id="new-button-main" data-transition="slide">New</a>
         </div>
 
         <!--<footer data-role="footer" data-position="fixed">
@@ -65,7 +65,7 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
     <div data-role="page" id="task-page">
 
         <div data-role="header" class="header">
-            <h1 id="task-title">Task 1</h1>
+            <h1 id="task-title">Task View</h1>
             <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-back ui-btn-icon-notext" data-transition="slide" data-direction="reverse" id="back-button">Back</a>
         </div>
 
@@ -90,17 +90,6 @@ http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src '
         </div>
 
         <div role="main" class="ui-content">
-            <!--<form>
-                <fieldset data-role="controlgroup" data-iconpos="right">
-                    <input type="checkbox" name="ratio-check" id="ratio-check" />
-                    <label for="ratio-check">Ratio</label>
-
-                    <input type="checkbox" name="percentage-check" id="percentage-check" />
-                    <label for="percentage-check">Percentage</label>
-                </fieldset>
-                <a href="#main-page" class="ui-btn ui-shadow ui-corner-all" id="save-button" data-transition="slide" data-direction="reverse">Save</a>
-            </form>-->
-
             <form>
                 <fieldset data-role="controlgroup">
                     <legend>Display as:</legend>

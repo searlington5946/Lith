@@ -1,14 +1,5 @@
-﻿var currentLith = {
-
-    title: "None",
-    total: 0,
-    complete: 0
-
-};
-
+﻿var currentLith;
 var globalIndex;
-
-//var liths = [];
 
 function saveLiths() {
 
@@ -22,11 +13,11 @@ function loadLiths() {
 
     if (liths != null) {
 
-        populateLithsList();
+        populateTaskList();
 
     } else {
 
-        //alert("Error: no liths found");
+        // storage is empty
         liths = [];
 
     }
@@ -40,7 +31,7 @@ function deleteLith() {
 
 }
 
-function lithsComplete() {
+function recordCompletedLiths() {
 
     currentLith.complete = 0;
 
@@ -48,19 +39,16 @@ function lithsComplete() {
         if ($(this).hasClass("ui-flipswitch-active")) { currentLith.complete += 1; }
     });
 
-    //alert(currentLith.complete);
     saveLiths();
 
 }
 
-function createLith() {
-
-    //alert("Creating Lith...");
+function createTask() {
 
     taskNameStr = $("#text-title").val().toString();
     if (taskNameStr.length == 0) {
         alert("Must create a title name...");
-        $("#create-button").attr("href", "#"); // pls no bully
+        $("#create-button").attr("href", "#");
         return -1;
     }
 
@@ -73,7 +61,6 @@ function createLith() {
     }
 
     $("#create-button").attr("href", "#main-page");
-    //$("#create-button").click();
 
     var newLith = {
 
@@ -85,14 +72,18 @@ function createLith() {
 
     liths.push(newLith);
 
-    populateLithsList();
-    populateLithsView();
+    populateTaskList();
+    populateTaskView();
 
     saveLiths();
 
 }
 
-function populateLithsView() {
+function populateTaskView() {
+
+    if (liths.length == 0 || currentLith == null) {
+        return 0;
+    }
 
     $("#task-title").html(currentLith.title);
 
@@ -121,16 +112,18 @@ function populateLithsView() {
 
 function updateCurrentLith(idx) {
 
-    //alert(idx);
-    //console.log(liths)
     currentLith = liths[idx];
-    populateLithsView();
+    populateTaskView();
 
 }
 
-function populateLithsList() {
+function populateTaskList() {
 
     $("#liths-list").html(""); // reset list
+
+    if (liths.length == 0) {
+        $("#liths-list").html("<center>You don't have any tasks. Create some!</center>");
+    }
 
     loadSettings();
 
@@ -144,15 +137,12 @@ function populateLithsList() {
             amntStr = percent.toString() + "%";
         }
 
-        //listStr = "<li data-icon=\"delete\">";
         listStr = "<li>";
         listStr += "<a href=\"#task-page\">";
         listStr += liths[i].title;
         listStr += "<span class=\"ui-li-count\">";
         listStr += amntStr;
         listStr += "</span></a></li>";
-        
-        //console.log(listStr);
 
         $("#liths-list").append(listStr);
         $("#liths-list").listview("refresh");

@@ -1,11 +1,11 @@
 ﻿function saveSettings() {
 
-    var what = $('input:radio:checked').val();
+    var currentlyChecked = $('input:radio:checked').val();
 
-    if (what == "ratio") {
+    if (currentlyChecked == "ratio") {
         ratioEnabled = true;
         percentageEnabled = false;
-    } else if (what == "percentage") {
+    } else if (currentlyChecked == "percentage") {
         ratioEnabled = false;
         percentageEnabled = true;
     } else {

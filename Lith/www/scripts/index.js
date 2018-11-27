@@ -1,4 +1,7 @@
-﻿// For an introduction to the Blank template, see the following documentation:
+﻿var ratioEnabled;
+var percentageEnabled;
+
+// For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkID=397704
 // To debug code on page load in cordova-simulate or on Android devices/emulators: launch your app, set breakpoints, 
 // and then run "window.location.reload()" in the JavaScript Console.
@@ -31,11 +34,10 @@ $('#settings-page').on('pagecreate', function (event) {
     loadSettings();
 
     // have to call refresh to update the element's class
-    //$("#ratio-radio").prop('value', ratioEnabled).checkboxradio('refresh');
     $("#ratio-radio").prop('checked', ratioEnabled).checkboxradio('refresh');
     $("#percentage-radio").prop('checked', percentageEnabled).checkboxradio('refresh');
 
-    $('#save-button').click(function () { saveSettings(); populateLithsList(); });
+    $('#save-button').click(function () { saveSettings(); populateTaskList(); });
 
     // user left without saving so just reload the current settings
     $('#back-button').click(function () { loadSettings(); });
@@ -46,24 +48,20 @@ $("#main-page").on('pagecreate', function (event) {
 
     loadLiths();
     loadSettings();
-    //populateLithsList();
 
 });
 
 $("#task-page").on('pagecreate', function (event) {
 
-    populateLithsView();
-    $('#save-liths-button').click(function () { lithsComplete(); populateLithsList(); });
-    $('#delete-liths-button').click(function () { deleteLith(); populateLithsList(); });
+    populateTaskView();
+    $('#save-liths-button').click(function () { recordCompletedLiths(); populateTaskList(); });
+    $('#delete-liths-button').click(function () { deleteLith(); populateTaskList(); });
 
 });
 
 
 $("#create-page").on('pagecreate', function (event) {
 
-    $("#create-button").click(function () { createLith(); });
+    $("#create-button").click(function () { createTask(); });
 
 });
-
-var ratioEnabled;
-var percentageEnabled;
